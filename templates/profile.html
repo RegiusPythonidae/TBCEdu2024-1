@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container-lg h-98 bg-light rounded mt-2 p-4 shadow-lg">
+    <div class="row mt-2 justify-content-center">
+        <div class="col-4">
+            <h2>User Details</h2>
+            <img src="/static/{{ user['img'] }}" width="100%">
+            <h4>
+                Name: {{ user["fullname"] }}
+                {% if user["role"] == "admin" %}
+                <span class="badge text-bg-danger">Admin</span>
+                {% elif user["role"] == "moderator" %}
+                <span class="badge text-bg-success">Moderator</span>
+                {% else %}
+                <span class="badge text-bg-secondary">User</span>
+                {% endif %}
+            </h4>
+            <p> Age: {{ user["age"] }}</p>
+
+
+        </div>
+    </div>
+</div>
+{% endblock %}

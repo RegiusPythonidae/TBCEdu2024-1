@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container-lg h-98 bg-light rounded mt-2 p-4 shadow-lg">
+    {% for errors in form.errors.values() %}
+    {% for error in errors %}
+    <div class="alert alert-danger">
+        {{ error }}
+    </div>
+    {% endfor %}
+    {% endfor %}
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+
+        <div class="row mt-2">
+            {{ form.name(placeholder=form.name.label.text, class="form-control") }}
+        </div>
+        <div class="row mt-2">
+            {{ form.price(placeholder=form.price.label.text, class="form-control") }}
+        </div>
+        <div class="row mt-2">
+            {{ form.img(placeholder=form.img.label.text, class="form-control", accept=".png,.jpg,.jpeg") }}
+        </div>
+
+
+        <div class="mt-2">
+            {{ form.submit(class="btn btn-outline-primary") }}
+        </div>
+    </form>
+</div>
+{% endblock %}

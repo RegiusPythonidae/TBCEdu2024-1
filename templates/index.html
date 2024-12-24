@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="container-lg h-98 bg-light rounded mt-2 p-4 shadow-lg">
+    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="3"
+                    aria-label="Slide 4"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="2000">
+                <img src="/static/samsung.png" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item" data-bs-interval="2000">
+                <img src="/static/laptop.png" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item" data-bs-interval="2000">
+                <img src="/static/washing.png" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item" data-bs-interval="2000">
+                <img src="/static/galaxy.png" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <div class="row mt-2 justify-content-center">
+        {% for product in products %}
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+                <img src="/static/{{ product.img }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title"> {{ product.name }}</h5>
+                    <p class="card-text">{{ product.price }}</p>
+
+                    {% if current_user.is_authenticated %}
+                    <a href="/edit_product/{{ product.id }}" class="btn btn-primary">Edit</a>
+                    <a href="/delete_product/{{ product.id }}" class="btn btn-danger">Delete</a>
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <br>
+    {% for user in users %}
+    <a href="/profile/{{ user }}" class="btn btn-primary">{{user}}-ის პროფილი</a>
+    {% endfor %}
+</div>
+{% endblock %}
